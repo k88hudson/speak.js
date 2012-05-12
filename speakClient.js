@@ -6,7 +6,8 @@ try {
 }
 
 function speak(text, args) {
-  var PROFILE = 1;
+  var PROFILE = 1,
+      target = args && args.target ? args.target : "audio";
 
   function parseWav(wav) {
     function readInt(i, bytes) {
@@ -55,8 +56,8 @@ function speak(text, args) {
       return ret;
     }
 
-    document.getElementById("audio").innerHTML=("<audio id=\"player\" src=\"data:audio/x-wav;base64,"+encode64(wav)+"\">");
-    document.getElementById("player").play();
+    document.getElementById(target).innerHTML=("<audio id=\"" + target + "-player\" src=\"data:audio/x-wav;base64,"+encode64(wav)+"\">");
+    document.getElementById(target + "-player").play();
   }
 
   function playAudioDataAPI(data) {
